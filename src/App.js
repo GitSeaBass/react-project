@@ -1,6 +1,8 @@
 import './App.css';
 import React, { useState } from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import NavBar from './components/NavBar';
+import LoginPage from './components/LoginPage';
 
 const DUMMY_ITEMS = [
 {
@@ -35,7 +37,7 @@ const DUMMY_ITEMS = [
 }
 ];
 
-function App() {
+const App = () => {
   const[items, setItems] = useState(DUMMY_ITEMS);
   const addItemHandler = item => {
     setItems((prevItems) => {
@@ -51,7 +53,14 @@ function App() {
   }
 
   return (
-    <NavBar loggedIn={isLoggedIn} onLoggedIn={onLoggedIn}/>
+    <Router>
+      <div>
+        <Routes>
+          <Route exact path='/' element={<NavBar/>} />
+          <Route path='/login' element={<LoginPage loggedIn={isLoggedIn} onLoggedIn={onLoggedIn}/>} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
