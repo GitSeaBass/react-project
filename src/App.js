@@ -56,7 +56,7 @@ const App = () => {
     <Router>
       <div>
         <Routes>
-          <Route exact path='/' element={<NavBar/>} />
+          <Route exact path='/' element={<NavBar loggedIn={isLoggedIn}/>} />
           <Route path='/login' element={<LoginPage loggedIn={isLoggedIn} onLoggedIn={onLoggedIn}/>} />
         </Routes>
       </div>
