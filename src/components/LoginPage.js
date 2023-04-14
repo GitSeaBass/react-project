@@ -3,15 +3,31 @@ import {Link} from 'react-router-dom';
 import React, {useState} from 'react';
 
 function LoginPage(props) {
-
+    /*//saving entered data
     const [user, setUser] = useState({
         user: '',
         pass: '',
-    });
+    });*/
 
-    const onChange = (e) => {
-        setUser({...user, [e.target.id]: e.target.value})
-        console.log(user.user);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const addUsername = (e) => {
+        setUsername(e.target.value);
+    }
+
+    const addPassword = (e) => {
+        setPassword(e.target.value);
+    }
+
+    const [validCred, setValidCred] = useState(false);
+    const onSubmit = () => {
+        setValidCred(() => {
+            if (props.users.some(item => item.user === username && item.pass === password)) {
+                return true;            
+            }
+            return false;
+        })
     }
 
     return (
@@ -19,17 +35,18 @@ function LoginPage(props) {
             <h2 id='loginHeader'>Login</h2>
 
             <form className='login-form'>
-                <label for="user">Username</label> <br/>
-                <input type="text" id="user" onChange={onChange}></input> <br/>
+                <label >Username</label> <br/>
+                <input type="text" id="user" onChange={addUsername}></input> <br/>
 
-                <label for="pass">Password</label> <br/>
-                <input type="text" id="pass" onChange={onChange}></input> <br/>
+                <label >Password</label> <br/>
+                <input type="text" id="pass" onChange={addPassword}></input> <br/>
             </form>
 
-            <Link to='/'> {/*this needs to be input type submit*/}
+            <Link to={validCred ? '/':'.'}>
                     <button onClick={() => {
-                        props.onLoggedIn();
-                        props.addCurrentUser(user.user);
+                        onSubmit();
+                        props.onLoggedIn(true);
+                        props.addCurrentUser(username);
                     }} id='loginButton' className='button'>LOGIN</button>
             </Link>
         </div>

@@ -2,6 +2,11 @@ import './NavBar.css';
 import {Link} from 'react-router-dom';
 
 function NavBar(props) {
+
+    function isLoggingOut() {
+      props.onLoggedIn(false);
+    }
+
     return (
       <div className='NavBar'>
         <div className='brand'>
@@ -16,7 +21,7 @@ function NavBar(props) {
               <button className='button'> Sign In</button>
             </Link>
           } 
-          {props.loggedIn ? <button className='button' onClick={props.onLoggedIn}>Logout</button>:
+          {props.loggedIn ? <button className='button' onClick={isLoggingOut}>Logout</button>:
           <Link to='/signup'>
             <button className='button'>Sign Up</button>
           </Link>
