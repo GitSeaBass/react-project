@@ -36,3 +36,7 @@
 .logo {
     width: 40%;
 }
+
+p {
+    display: inline-block;
+}

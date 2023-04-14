@@ -10,13 +10,17 @@ function NavBar(props) {
         </div>
 
         <div className='buttons'>
+        {props.loggedIn ? <p>{props.user}</p>:<></>}
           {props.loggedIn ? <button className='button'>Create Post</button>:
             <Link to='/login'>
               <button className='button'> Sign In</button>
             </Link>
           } 
           {props.loggedIn ? <button className='button' onClick={props.onLoggedIn}>Logout</button>:
-            <button className='button'>Signup</button>}
+          <Link to='/signup'>
+            <button className='button'>Sign Up</button>
+          </Link>
+          }
         </div>
       </div>
     );

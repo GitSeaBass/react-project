@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import NavBar from './components/NavBar';
 import LoginPage from './components/LoginPage';
+import SignUpPage from './components/SignUpPage';
 
 const DUMMY_ITEMS = [
 {
@@ -37,12 +38,26 @@ const DUMMY_ITEMS = [
 }
 ];
 
+const DUMMY_USERS = [
+  {user: 'user01', pass: 'pass1'},
+  {user: 'user02', pass: 'pass2'},
+];
+
 const App = () => {
   const[items, setItems] = useState(DUMMY_ITEMS);
   const addItemHandler = item => {
     setItems((prevItems) => {
       return [item, ...prevItems];
     });
+  }
+
+  const[users, setUsers] = useState(DUMMY_USERS);
+
+  const[currentUser, setCurrentUser] = useState('');
+  const addCurrentUser = (newUser) => {
+    setCurrentUser(() => {
+      return newUser;
+    })
   }
 
   const[isLoggedIn, setIsLoggedIn] = useState(false);
@@ -56,8 +71,9 @@ const App = () => {
     <Router>
       <div>
         <Routes>
-          <Route exact path='/' element={<NavBar loggedIn={isLoggedIn} onLoggedIn={onLoggedIn}/>} />
-          <Route path='/login' element={<LoginPage loggedIn={isLoggedIn} onLoggedIn={onLoggedIn}/>} />
+          <Route exact path='/' element={<NavBar loggedIn={isLoggedIn} onLoggedIn={onLoggedIn} user={currentUser}/>} />
+          <Route path='/login' element={<LoginPage loggedIn={isLoggedIn} onLoggedIn={onLoggedIn} addCurrentUser={addCurrentUser}/>} />
+          <Route path='/signup' element={<SignUpPage />} />
         </Routes>
       </div>
     </Router>
