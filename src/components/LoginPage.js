@@ -1,17 +1,19 @@
+import './LoginPage.css'
 import {Link} from 'react-router-dom';
 
 function LoginPage(props) {
     return (
-        <div>
-            <form>
+        <div className='LoginPage'>
+            <h2 id='loginHeader'>Login</h2>
+            <form className='login-form'>
                 <label for="name">Username</label> <br/>
                 <input type="text" id="name"></input> <br/>
                 <label for="pass">Password</label> <br/>
                 <input type="text" id="pass"></input> <br/>
-                <Link to='/'>
-                    <button onClick={props.onLoggedIn}>Login</button>
-                </Link>
             </form>
+            <Link to='/'>
+                    <button onClick={props.onLoggedIn} id='loginButton' className='button'>LOGIN</button>
+            </Link>
         </div>
     );
 }
